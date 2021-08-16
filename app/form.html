@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Form Validation</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <form name="myForm" method="post" onblur="submitForm()">
+          <div class="mb-3">
+            <label for="fname" class="form-label">First Name</label>
+            <span id="error-fname"class="err" class="err"></span>
+            <input type="text" class="form-control" id="fname" name="fname" onblur="validateForm(this)">
+          </div>
+          <div class="mb-3">
+            <label for="lname" class="form-label">Last Name</label>
+            <span id="error-lname" class="err"></span>
+            <input type="text" class="form-control" id="lname" name="lname" onblur="validateForm(this)">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label><span id="error-email" class="err"></span>
+            <input type="email" class="form-control" id="email" name="email" onblur="validateForm(this)">
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone number</label><span id="error-phone" class="err"></span>
+            <input type="text" class="form-control" id="phone" name="phone" onblur="validateForm(this)">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label><span id="error-password" class="err"></span>
+            <input type="text" class="form-control" id="password" onblur="validateForm(this)">
+          </div>
+         
+          <button type="submit" disabled="disabled" class="btn btn-primary" id="submitForm">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    function validateForm(input) {
+    var errcount = 0;
+    console.log(errcount)
+    if (input.value.length < 1) {
+        input.style.borderColor = "#e74c3c"; 
+        console.log("first----->" + errcount)
+    } 
+
+    else if (input.id === "fname" || input.id === "lname") {
+      console.log("second----->" + errcount)
+      var inputVal= input.value;
+      var pattern=/^[A-Za-z]+$/;
+      var result= pattern.test(inputVal);
+      if(result){
+        input.style.borderColor = "#2ecc71";
+        errcount = 0;
+        console.log("third----->" + errcount)
+      }
+      else{
+        input.style.borderColor = "#e74c3c";
+        errcount++;
+        console.log("four----->" +errcount)
+      }
+    }
+
+    else if (input.id == "phone") {
+      var inputVal= input.value;
+      var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+      var result= phoneno.test(inputVal);
+      if(result){
+        input.style.borderColor = "#2ecc71";
+        errcount = 0;
+      }
+      else{
+        input.style.borderColor = "#e74c3c";
+        errcount++;
+      }
+    }
+
+    else if (input.id == "password") {
+      var inputVal= input.value;
+      var password = /^((?=.*\W).{8,})$/;
+      var result= password.test(inputVal);
+      if(result){
+        input.style.borderColor = "#2ecc71";
+        errcount = 0;
+      }
+      else{
+        input.style.borderColor = "#e74c3c";
+        errcount++;
+      }
+    }
+
+    else if (input.type == "email") {
+        if (input.value.indexOf("@") != -1 && input.value.indexOf(".") != -1) {
+          input.style.borderColor = "#2ecc71";
+          errcount = 0;
+        } else {
+          input.style.borderColor = "#e74c3c";
+          errcount++;
+        }
+      
+    } 
+    else {
+        input.style.borderColor = "#2ecc71";    
+        
+    }
+    console.log(errcount);
+    if(errcount === 0){
+      document.getElementById("submitForm").disabled=false;
+    }
+}
+
+function submitForm(input){
+  if(input.id === "fname"){
+    
+  }
+}
+  
+  </script>
+</body>
+
+</html>

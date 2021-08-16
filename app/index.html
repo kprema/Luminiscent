@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PLP - product listing page</title>
+  
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+  
+
+<body>
+<div class="container-fluid">
+  <div class="row"><header>Logo</header></div>
+  <main id="content">
+    <div class="row">
+      <div class="col totalResult"></div>
+      <div class="col">
+        <select class="float-end">
+        <option>Ascending</option>
+        <option>Descending</option>
+      </select>
+    </div>
+      
+    </div>
+    <div class="row plp">
+      
+    </div>
+  </main>
+  </div>
+  <div class="row"><footer>Copyright</footer></div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+<script src="../index.js"></script> 
+<script>(function ($) {
+  $.extend(jQuery.tmpl.tag, {
+      "for": {
+          _default: {$2: "var i=1;i<=1;i++"},
+          open: 'for ($2){',
+          close: '};'
+      }
+  });
+  })(jQuery);
+</script>
+  
+<script id='PLPTemplate' type='text/x-jquery-tmpl'>
+  <div class="col-xs-12 col-md-6 col-lg-4">
+    <div class="productItem">
+      <div class="productItem__img">
+        <img src="${picture}" alt="" />
+        {{if isFav}}
+        <span class="favIcon fa fa-heart"></span>
+        {{else}}
+        <span class="favIcon fa fa-heart-o"></span>
+        {{/if}}
+      </div>
+
+      <div class="productItem__details">
+        <div class="productItem__name">
+          <a href="${url}">${name}</a>
+        </div>
+        <div class="productItem__sizeRating">
+          <span class="size">${size}</span>
+          {{for(i=0;i<rating;i++)}}
+            <span class="rating fa fa-star"></span> 
+          {{/for}}
+        </div>
+        <div class="productItem__price">
+          <span class="saveprice">${price}</span>
+          {{if oldPrice}}<span class="mrpprice"><strike>${oldPrice}</strike></span>{{/if}}
+          {{if savings}}<span class="savedetailprice">you save ${savings}</span>{{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</script>;
+</body>
+
+</html>
